@@ -1,7 +1,7 @@
 # Neovim configuration managed using https://github.com/nix-community/nixvim
 {
   # Theme
-  colorschemes.tokyonight.enable = true;
+  colorschemes.gruvbox.enable = true;
 
   # Settings
   opts = {
@@ -24,7 +24,21 @@
     web-devicons.enable = true;
     lualine.enable = true;
     bufferline.enable = true;
-    treesitter.enable = true;
+    treesitter = {
+  enable = true;
+  ensureInstalled = [
+    "lua"
+    "vim"
+    "vimdoc"
+    "bash"
+    "json"
+    "yaml"
+    "toml"
+    "markdown"
+    "nix"
+  ];
+};
+
     which-key = {
       enable = true;
     };
@@ -35,8 +49,6 @@
         bottom_search = true;
         command_palette = true;
         long_message_to_split = true;
-        #inc_rename = false;
-        #lsp_doc_border = false;
       };
     };
     telescope = {
@@ -56,23 +68,6 @@
       };
     };
 
-    # Dev
-    lsp = {
-      enable = true;
-      servers = {
-        hls = {
-          enable = true;
-          installGhc = false; # Managed by Nix devShell
-        };
-        marksman.enable = true;
-        nil_ls.enable = true;
-        rust_analyzer = {
-          enable = true;
-          installCargo = false;
-          installRustc = false;
-        };
-      };
-    };
     lazygit.enable = true;
   };
   keymaps = [
